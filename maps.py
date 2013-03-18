@@ -2,10 +2,14 @@
    Map comprehension: 
    In python 2,
       dict((k, v) for (k, v) in map.items())
+   In python 3,
+      { (k, v) for (k, v) in map.items() }
 '''
 
-# List to a map
-
+print " ---- Example: creating a map from a list ---- "
+values = ['a', 'b', 'c', 'd', 'e', 'f', 'g']
+print ">>> dict( (values[i], i ) for i in xrange(len(values)) )"
+print dict( (values[i], i ) for i in xrange(len(values)) )
 
 '''
    Regex pattern matching a list
