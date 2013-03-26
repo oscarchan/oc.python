@@ -1,4 +1,7 @@
-
+# -*- coding: utf-8 -*-
+import string
+import random
+from operator import itemgetter, attrgetter
 '''  
    List data type
 '''
@@ -18,16 +21,17 @@ filter(re.compile('call').search, methods)
 
 # Solution B:
 [m for m in methods if r.search(m)]
-or
+# or
 [m for m in methods if re.search('call', m)]
 
 # Solution C:
 l = []
 for m in methods: 
-  l.append(m) if r.search(m)
+  if r.search(m):
+    l.append(m) 
 
 # Solution D:
-reduce(lambda: acc, e: acc  , methods, [])
+reduce(lambda acc, e: acc  , methods, [])
 
 # ---- Example: getting the index list of regex matching elements within a list ----
 import __builtin__
@@ -51,3 +55,42 @@ reduce(lambda acc,d: acc and d, l, True)
 
 # Solution B:
 reduce(bool.__and__, l, True)
+
+
+print " ---- Example: soring a string list ---- "
+def id_generator(size=6, chars=string.ascii_uppercase + string.digits):
+    return ''.join(random.choice(string.ascii_uppercase + string.digits) for x in range(size))
+
+values = [ id_generator() for _ in xrange(10) ]
+print ">>> values = %s " % str(values)
+
+print ">>> sorted(values, key=str.lower) "
+print sorted(values, key=str.lower)
+
+print ">>> sorted(values, key=str.lower, reverse=True) "
+print sorted(values, key=str.lower, reverse=True)
+
+
+print " ---- Example: soring a list of object ---- "
+
+def object_generator():
+    return dict(
+      id=id_generator(size=6),
+      username=id_generator(size=10),
+      email=id_generator() + '@test.com'
+      )
+
+values = [ object_generator() for _ in xrange(10) ]
+print ">>> values = %s " % str(values)
+
+# no particular order - on mac, it seems to be related to 
+#print ">>> sorted(values) "
+#print sorted(values)
+
+print ">>> sorted(values, key=lambda item: item['id'])"
+print sorted(values, key=lambda item: item['id'])
+
+
+print ">>> sorted(values, key=lambda item: item['id'], reverse=True)"
+print sorted(values, key=lambda item: item['id'], reverse=True)
+
