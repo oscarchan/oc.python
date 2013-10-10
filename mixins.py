@@ -6,14 +6,26 @@ def printClassInfo(obj):
     print inspect.getclasstree([type(obj)])
 
 class HelloMixin(object):
+    def __init__(self, *args, **kwargs):
+        print "HelloMixin.__init__(%s)" % self.__class__.__name__
+        super(HelloMixin, self).__init__(*args, **kwargs)
+        
     def hello(self):
         print "%s.hello" % self.__class__.__name__
 
 class Hello2Mixin(object):
+    def __init__(self, *args, **kwargs):
+        print "Hello2Mixin.__init__(%s)" % self.__class__.__name__
+        super(Hello2Mixin, self).__init__(*args, **kwargs)
+
     def hello(self):
         print "%s.hello2" % self.__class__.__name__
 
 class PingMixin(object):
+    def __init__(self, *args, **kwargs):
+        print "PingMixin.__init__(%s)" % self.__class__.__name__
+        super(PingMixin, self).__init__(*args, **kwargs)
+
     def ping(self):
         print "%s.hello2" % self.__class__.__name__
 

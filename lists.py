@@ -56,8 +56,31 @@ reduce(lambda acc,d: acc and d, l, True)
 # Solution B:
 reduce(bool.__and__, l, True)
 
+print " ---- Example: reduce a string list ---- "
 
-print " ---- Example: soring a string list ---- "
+email = 'oscar@test.com'
+def matching_email(found, member):
+    return found or member['email'] == email
+
+members = [ {'email': 'abc@test.com'}, {'email': 'oscar@test.com'} ]
+found = reduce(matching_email, members, False)  
+print """
+>>> members = [ {'email': 'abc@test.com'}, {'email': 'oscar@test.com'} ]
+>>> found = reduce(matching_email, members, False)  
+"""
+
+print "found: ", found
+
+members = [ {'email': 'abc@test.com'}, {'email': 'oscar@xxx.com'} ]
+found = reduce(matching_email, members, False)  
+
+print """
+>>> members = [ {'email': 'abc@test.com'}, {'email': 'oscar@xxx.com'} ]
+>>> found = reduce(matching_email, members, False)  
+"""
+print "found: ", found
+
+print " ---- Example: sorting a string list ---- "
 def id_generator(size=6, chars=string.ascii_uppercase + string.digits):
     return ''.join(random.choice(string.ascii_uppercase + string.digits) for x in range(size))
 
@@ -71,7 +94,7 @@ print ">>> sorted(values, key=str.lower, reverse=True) "
 print sorted(values, key=str.lower, reverse=True)
 
 
-print " ---- Example: soring a list of object ---- "
+print " ---- Example: sorting a list of object ---- "
 
 def object_generator():
     return dict(
@@ -93,4 +116,6 @@ print sorted(values, key=lambda item: item['id'])
 
 print ">>> sorted(values, key=lambda item: item['id'], reverse=True)"
 print sorted(values, key=lambda item: item['id'], reverse=True)
+
+print " ---- Example: reducing a list of dict ---- "
 
