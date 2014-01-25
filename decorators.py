@@ -70,8 +70,10 @@ def decorator_with_optional_args(*args, **kwargs):
 
     if len(args) == 1 and callable(args[0]):
         # no arguments, this is the decorator
+        print "decorator_with_optional_args:no args: (*args=%s, **kwargs=%s)" % (args, kwargs)
         return wrapper(args[0])
     else:
+        print "decorator_with_optional_args:with args: (*args=%s, **kwargs=%s)" % (args, kwargs)
         return wrapper
 
 
@@ -162,6 +164,20 @@ def f3b(user, password):
 
 print "f3b returned=", f3b(13423, "abcd"), "<<"
 
+
+print """
+@decorator_with_optional_args(test="testme")
+def f3c(user):
+    print "f3c"
+    return "f3c"
+"""
+
+@decorator_with_optional_args("testme")
+def f3c(user):
+    print "f3c"
+    return "f3c"
+
+print "f3c returned=", f3c(13423), "<<"
 
 # --- Example: functools.wraps ---
 from functools import wraps
