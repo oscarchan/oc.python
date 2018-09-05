@@ -33,3 +33,5 @@ pip-log.txt
 
 .project
 .pydevproject
+.idea/
+.pytest_cache/
