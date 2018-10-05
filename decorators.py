@@ -1,8 +1,36 @@
 #from decorator import decorator
 from functools import wraps
-print("""
-   decorator with class
-""")
+
+registry = {}
+from collections import namedtuple
+
+def class_register(name, *args, **kwargs):
+    """ class decorator with callable functions.
+
+    Here is an example:
+        @class_decorator(arg1, arg2, kwarg1=x, kwarg2=y)
+        class CallableClass(object):
+    """
+    def wrapper(clazz):
+        registry[name] = (clazz, args, kwargs)
+        return clazz
+    return wrapper
+
+print
+print("---- Example: class decorator for registration ----")
+print
+@class_register("experiment_mapper", "experimentsvc")
+class ExperimentMapper(object):
+    def __init__(self, experimentsvc):
+        print(f"ExperimentMapper({experimentsvc})")
+
+print(f"registry={registry}")
+
+(mapper_class, mapper_args, mapper_kwargs) = registry["experiment_mapper"]
+
+mapper_object = mapper_class(*mapper_args, **mapper_kwargs)
+
+print(f"mapper_object {mapper_object}")
 
 def loggable(funct):
     def wrapped(*args, **kwargs):
@@ -170,9 +198,9 @@ print("""
 def f3c(user):
     print("f3c"
     return "f3c"
-"""
+""")
 
-@decorator_with_optional_args("testme"))
+@decorator_with_optional_args("testme")
 def f3c(user):
     print("f3c")
     return "f3c"

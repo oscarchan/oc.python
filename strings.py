@@ -61,6 +61,7 @@ def test_find():
 
     assert "a.b.c.d".find("-", 0) == -1
 
+
 def test_find2():
     first_index = "a.b.c.d".find(".", 0)
 
